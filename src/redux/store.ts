@@ -5,11 +5,11 @@ import { baseApi } from "./api/baseApi";
 export const store = configureStore({
   reducer: {
     cart: cartSlice,
-    [baseApi.reducerPath] : baseApi.reducer
+    [baseApi.reducerPath]: baseApi.reducer,
   },
 
-
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware)
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(baseApi.middleware),
 });
 
 // Get the type of our store variable
