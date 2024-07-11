@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetAllProductsQuery } from "../redux/features/product/productApi";
 import { useGetAllCategoryQuery } from "../redux/features/category/categoryApi";
 import ProductsWithFilterSidebar from "../components/helpingCompo/ProductsWithFilterSidebar";
-
+import { useLocation } from "react-router-dom";
 
 const Products = () => {
   const [pagination, setPagination] = useState({ page: 1, limit: 12 });
-  const [filters, setFilters] = useState({ category: [] });
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const categoryQuery = query.get("category");
+
+  const [filters, setFilters] = useState<{ category: string[] }>({
+    category: [],
+  });
 
   const [searchTerm, setSearchTerm] = useState<string | null>(null);
 
@@ -21,7 +27,13 @@ const Products = () => {
   const { data: categories, isLoading: isCategoriesLoading } =
     useGetAllCategoryQuery(pagination);
 
-  console.log(categories, "categories from products");
+  console.log(categoryQuery, "categoryQuery");
+
+  // Add category to filter from query params
+  useEffect(() => {
+    const categoryQuery = query.getAll("category");
+    setFilters({ category: categoryQuery });
+  }, []);
 
   return (
     <ProductsWithFilterSidebar

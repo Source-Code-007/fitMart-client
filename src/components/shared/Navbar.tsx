@@ -1,23 +1,18 @@
 import { Button, Input, Menu, MenuProps, Skeleton } from "antd";
 import React, { useEffect, useRef, useState } from "react";
-import {
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
-  HomeFilled,
-  ProductFilled,
-} from "@ant-design/icons";
+import { HomeFilled, ProductFilled } from "@ant-design/icons";
 import logo from "../../assets/img/logo.png";
 import Container from "../ui/Container";
 import { Link } from "react-router-dom";
 import useDebounce from "../../hooks/useDebounce";
 import { useGetAllProductsQuery } from "../../redux/features/product/productApi";
+import { TProduct } from "../../types/index.type";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
 const items: MenuItem[] = [
   {
-    label: "Home",
+    label: <Link to={"/"}>Home</Link>,
     key: "home",
     icon: <HomeFilled />,
   },
@@ -27,8 +22,8 @@ const items: MenuItem[] = [
     icon: <ProductFilled />,
   },
   {
-    key: "about",
-    label: <Link to={"/about"}>about</Link>,
+    key: "About",
+    label: <Link to={"/about"}>About</Link>,
   },
 ];
 
@@ -37,18 +32,18 @@ const Navbar: React.FC = () => {
   const { Search } = Input;
   const [searchTerm, setSearchTerm] = useState("");
   const debounceSearchTerm = useDebounce(searchTerm, 500);
-  const searchRef = useRef(null);
+  const searchRef = useRef<HTMLDivElement>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const { data: productsData, isLoading: isLoadingProducts } =
     useGetAllProductsQuery({ searchTerm: debounceSearchTerm });
 
   useEffect(() => {
-    const handleClickOutside = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleClickOutside = (e: MouseEvent) => {
       if (
         searchRef &&
         searchRef.current &&
-        !searchRef.current.contains(e.target)
+        !searchRef.current.contains(e.target as Node)
       ) {
         setIsSearchOpen(false);
       } else {
@@ -68,10 +63,11 @@ const Navbar: React.FC = () => {
     setCurrent(e.key);
   };
 
-  console.log(productsData, "productsData");
-
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white">
+    <nav
+      className="fixed top-0 left-0 right-0 bg-white"
+      style={{ zIndex: 10000 }}
+    >
       <Container>
         <div className="flex justify-between items-center gap-4 border-b border-b-secondary-100">
           <Link to={"/"}>
@@ -102,25 +98,28 @@ const Navbar: React.FC = () => {
                       </strong>
                     </h2>
 
+                    {/* Product */}
                     <div className="max-h-[300px] my-scrollbar overflow-y-auto space-y-2">
-                      {productsData?.data?.map((product, ind) => (
-                        <Link
-                          to={`/product/${product?._id}`}
-                          onClick={() => setSearchTerm("")}
-                          key={ind}
-                          className="flex mb-2 gap-2 items-center hover:shadow cursor pointer py-3 px-1 cursor-pointer"
-                        >
-                          <img
-                            src={product?.images?.[0]?.url}
-                            alt={product?.title}
-                            className="h-8 w-8 rounded"
-                          />
-                          <div className="space-y-1">
-                            <h2 className="font-bold">{product?.title}</h2>
-                            <h2>৳{product?.price}</h2>
-                          </div>
-                        </Link>
-                      ))}
+                      {productsData?.data?.map(
+                        (product: TProduct, ind: number) => (
+                          <Link
+                            to={`/product/${product?._id}`}
+                            onClick={() => setSearchTerm("")}
+                            key={ind}
+                            className="flex mb-2 gap-2 items-center hover:shadow cursor pointer py-3 px-1 cursor-pointer"
+                          >
+                            <img
+                              src={product?.images?.[0]}
+                              alt={product?.name}
+                              className="w-8 h-auto rounded"
+                            />
+                            <div className="space-y-1">
+                              <h2 className="font-bold">{product?.name}</h2>
+                              <h2>৳{product?.price}</h2>
+                            </div>
+                          </Link>
+                        )
+                      )}
                     </div>
                   </div>
                 )}

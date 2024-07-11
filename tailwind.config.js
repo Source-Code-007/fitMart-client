@@ -19,7 +19,7 @@ export default {
         },
         secondary: {
           100: "#E2E2D5",
-          200: "#888883",
+          200: "#8390a2",
         },
         grey: "#a0aec0",
         success: "#10b981",

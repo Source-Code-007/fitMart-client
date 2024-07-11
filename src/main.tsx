@@ -7,6 +7,10 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { ConfigProvider } from "antd";
 
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ConfigProvider

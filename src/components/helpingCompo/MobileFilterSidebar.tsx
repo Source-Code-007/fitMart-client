@@ -54,7 +54,7 @@ const MobileFilterSidebar: React.FC<TProductsWithFilterSidebar> = ({
         <h2 className="text-lg font-semibold">Filter</h2>
 
         <button
-          className="px-2 py-1 rounded font-semibold text-sm text-white bg-slate-500 bg-opacity-80"
+          className="px-2 py-1 rounded font-semibold text-sm text-white bg-secondary-200 bg-opacity-80"
           onClick={handleResetFilter}
         >
           Reset

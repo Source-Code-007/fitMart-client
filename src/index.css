@@ -75,8 +75,8 @@
 /*Custom scrollbar  */
 body,
 .my-scrollbar {
-  --sb-track-color: #b8c4d8fe;
-  --sb-thumb-color: #93278f;
+  --sb-track-color: #a0aec0;
+  --sb-thumb-color: #0e7673;
   --sb-size: 10px;
 }
 body::-webkit-scrollbar,
