@@ -8,16 +8,20 @@ const productApi = baseApi.injectEndpoints({
         method: "POST",
         body: payload,
       }),
+      invalidatesTags: ["product"],
     }),
     getAllProducts: builder.query({
       query: (filter) => {
         const params = new URLSearchParams();
+
+        console.log(filter, "filter");
 
         if (filter?.pagination) {
           // params.push(`page=${filter.pagination?.page}`);
           // params.push(`limit=${filter.pagination?.limit}`);
           params.append("page", filter.pagination.page);
           params.append("limit", filter.pagination.limit);
+          console.log(filter.pagination.page, "api");
         }
         if (filter?.sort) {
           // params.push(`sort=${filter.sort}`);
@@ -54,17 +58,19 @@ const productApi = baseApi.injectEndpoints({
           params: params,
         };
       },
+      providesTags: ["product"],
     }),
     getSingleProduct: builder.query({
       query: (id) => `/product/${id}`,
     }),
 
     updateProduct: builder.mutation({
-      query: ({ id, ...payload }) => ({
-        url: `/product/${id}`,
+      query: (payload) => ({
+        url: `/product/${payload?._id}`,
         method: "PATCH",
         body: payload,
       }),
+      invalidatesTags: ["product"],
     }),
 
     deleteProduct: builder.mutation({
@@ -72,6 +78,7 @@ const productApi = baseApi.injectEndpoints({
         url: `/product/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["product"],
     }),
   }),
 });

@@ -21,7 +21,7 @@ const ProductCard: React.FC<TProductCard> = ({ product }) => {
       >
         <Link
           to={`/product/${product?._id}`}
-          className="font-bold text-xl inline-block mb-2 hover:text-primary-2 truncate w-full"
+          className="font-bold text-xl inline-block mb-2 hover:text-primary-2 truncate w-full hover:text-primary"
         >
           {product?.name}
         </Link>

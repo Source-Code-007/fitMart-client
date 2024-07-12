@@ -63,13 +63,13 @@ const ProductsWithFilterSidebar: React.FC<TProductsWithFilterSidebar> = ({
 
     // Remove unchecked categories from params
     // Remove unchecked categories from params
-    query.getAll('category').forEach(cat => {
+    query.getAll("category").forEach((cat) => {
       if (!filters.category.includes(cat)) {
         // Remove specific category occurrences from params
-        const catValues = query.getAll('category');
+        const catValues = query.getAll("category");
         catValues.forEach((value) => {
           if (value === cat) {
-            params.delete('category', value);
+            params.delete("category", value);
           }
         });
       }
@@ -246,8 +246,8 @@ const ProductsWithFilterSidebar: React.FC<TProductsWithFilterSidebar> = ({
                     <div className="pt-8 text-center">
                       <Pagination
                         //   onChange={(page, pageSize) => {
-                        onChange={(page) => {
-                          setPagination({ page, limit: 12 });
+                        onChange={(page, pageSize) => {
+                          setPagination({ page, limit: pageSize });
                         }}
                         total={products?.meta?.total}
                       />

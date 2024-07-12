@@ -5,7 +5,7 @@ import ProductsWithFilterSidebar from "../components/helpingCompo/ProductsWithFi
 import { useLocation } from "react-router-dom";
 
 const Products = () => {
-  const [pagination, setPagination] = useState({ page: 1, limit: 12 });
+  const [pagination, setPagination] = useState({ page: 1, limit: 10 });
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const categoryQuery = query.get("category");
@@ -26,8 +26,6 @@ const Products = () => {
     });
   const { data: categories, isLoading: isCategoriesLoading } =
     useGetAllCategoryQuery(pagination);
-
-  console.log(categoryQuery, "categoryQuery");
 
   // Add category to filter from query params
   useEffect(() => {

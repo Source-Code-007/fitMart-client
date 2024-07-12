@@ -2,12 +2,13 @@ import { baseApi } from "../../api/baseApi";
 
 const categoryApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    createProduct: builder.mutation({
+    createCategory: builder.mutation({
       query: (payload) => ({
         url: "/category",
         method: "POST",
         body: payload,
       }),
+      invalidatesTags: ["category", "product"],
     }),
     getAllCategory: builder.query({
       query: (filter) => {
@@ -27,17 +28,19 @@ const categoryApi = baseApi.injectEndpoints({
           params: query,
         };
       },
+      providesTags: ["category"],
     }),
     getSingleCategory: builder.query({
       query: (id) => `/category/${id}`,
     }),
 
     updateCategory: builder.mutation({
-      query: ({ id, ...payload }) => ({
-        url: `/category/${id}`,
+      query: (payload) => ({
+        url: `/category/${payload?._id}`,
         method: "PATCH",
         body: payload,
       }),
+      invalidatesTags: ["category", "product"],
     }),
 
     deleteCategory: builder.mutation({
@@ -45,12 +48,13 @@ const categoryApi = baseApi.injectEndpoints({
         url: `/category/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["category", "product"],
     }),
   }),
 });
 
 export const {
-  useCreateProductMutation,
+  useCreateCategoryMutation,
   useGetAllCategoryQuery,
   useGetSingleCategoryQuery,
   useUpdateCategoryMutation,

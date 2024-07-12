@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
       style={{ zIndex: 10000 }}
     >
       <Container>
-        <div className="flex justify-between items-center gap-4 border-b border-b-secondary-100">
+        <div className="flex justify-between items-center gap-4 border-b border-b-secondary-100 py-2">
           <Link to={"/"}>
             <img src={logo} alt="Fit Mart" className="w-[80px]" />
           </Link>
@@ -127,7 +127,9 @@ const Navbar: React.FC = () => {
             )}
           </div>
 
-          <Button type="primary">Login</Button>
+          <Button type="primary">
+            <Link to={"/dashboard"}>Dashboard</Link>
+          </Button>
         </div>
 
         {/* Menu */}

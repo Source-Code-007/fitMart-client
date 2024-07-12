@@ -1,15 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartSlice from "./features/cart/cartSlice";
 import { baseApi } from "./api/baseApi";
+import { uploadApi } from "./api/fileUpload";
 
 export const store = configureStore({
   reducer: {
     cart: cartSlice,
     [baseApi.reducerPath]: baseApi.reducer,
+    [uploadApi.reducerPath]: uploadApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(baseApi.middleware),
+    getDefaultMiddleware().concat(baseApi.middleware, uploadApi.middleware),
 });
 
 // Get the type of our store variable

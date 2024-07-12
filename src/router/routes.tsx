@@ -3,6 +3,9 @@ import MainLayout from "../layout/MainLayout";
 import Homepage from "../pages/Homepage";
 import Products from "../pages/Products";
 import Product from "../pages/Product";
+import DashboardLayout from "../layout/DashboardLayout";
+import DashboardProducts from "../pages/Dashboard/Products";
+import Category from "../pages/Dashboard/Category";
 
 const routes = createBrowserRouter([
   {
@@ -19,11 +22,33 @@ const routes = createBrowserRouter([
       },
       {
         path: "products",
-        element: <Products/>,
+        element: <Products />,
       },
       {
         path: "product/:id",
-        element: <Product/>,
+        element: <Product />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: "/dashboard",
+        element: (
+          <div className="bg-secondary-100 flex items-center justify-center h-screen font-bold text-2xl">
+            Homepage of dashboard is coming soon!
+          </div>
+        ),
+      },
+      {
+        path: "products",
+        element: <DashboardProducts />,
+      },
+      {
+        path: "category",
+        element: <Category />,
       },
     ],
   },
