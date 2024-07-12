@@ -9,6 +9,17 @@ export type TProduct = {
   createdAt?: string;
   updatedAt?: string;
 };
+export type TEditingProduct = {
+  _id: string;
+  name: string;
+  price: number;
+  description: string;
+  images: string[];
+  category: { name: string; _id: string };
+  stock: string;
+  createdAt?: string;
+  updatedAt?: string;
+};
 
 export type TProducts = {
   success: boolean;
@@ -29,3 +40,11 @@ export type TCategory = {
   createdAt?: string;
   updatedAt?: string;
 };
+
+export type TOrderStatus =
+  | "pending"
+  | "confirmed"
+  | "shipping"
+  | "shipped"
+  | "delivered";
+export type TPaymentStatus = "paid" | "unpaid";

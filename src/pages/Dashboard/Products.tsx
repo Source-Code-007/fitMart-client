@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import {
   Space,
@@ -10,7 +11,6 @@ import {
   message,
   Skeleton,
   Upload,
-  Switch,
   Tooltip,
   Select,
   InputNumber,
@@ -23,7 +23,7 @@ import {
   useGetAllProductsQuery,
   useUpdateProductMutation,
 } from "../../redux/features/product/productApi";
-import { TProduct } from "../../types/index.type";
+import { TCategory, TEditingProduct } from "../../types/index.type";
 import { useGetAllCategoryQuery } from "../../redux/features/category/categoryApi";
 import { useUploadFileMutation } from "../../redux/api/fileUpload";
 
@@ -41,7 +41,9 @@ const Products = () => {
     useCreateProductMutation();
   const [updateProduct, { isLoading: updateProductIsLoading }] =
     useUpdateProductMutation();
-  const [editingProduct, setEditingProduct] = useState<TProduct | null>(null);
+  const [editingProduct, setEditingProduct] = useState<TEditingProduct | null>(
+    null
+  );
   const [modalVisible, setModalVisible] = useState(false);
   const [form] = Form.useForm();
 
@@ -66,7 +68,7 @@ const Products = () => {
     }
   }, [editingProduct, form]);
 
-  const handleAddToProduct = async (values) => {
+  const handleAddToProduct = async (values: any) => {
     try {
       const images = [];
       // const imgUrl = imgbbRes.data.display_url;
@@ -93,18 +95,18 @@ const Products = () => {
     }
   };
 
-  const handleUpdateProduct = async (values: Partial<TProduct>) => {
-    const images = [];
+  const handleUpdateProduct = async (values: any) => {
+    const images: string[] = [];
 
     // Check if images are provided and not empty
     if (values.images && values.images.length > 0) {
       // Iterate over the images and upload each one
-      for (let image of values.images) {
+      for (let image of values.images as any) {
         const formData = new FormData();
         formData.append("image", image.originFileObj);
 
         // Call the uploadFile mutation for each image
-        const file = await uploadFile(formData).unwrap();
+        const file = await uploadFile(formData as any).unwrap();
 
         // Store the uploaded image URL
         images.push(file.data.url);
@@ -115,7 +117,7 @@ const Products = () => {
       const res = await updateProduct({
         _id: editingProduct?._id,
         ...values,
-        category: editingProduct?.category?.value,
+        category: editingProduct?.category?._id,
         ...(images.length > 0 && { images }),
       }).unwrap();
 
@@ -126,7 +128,7 @@ const Products = () => {
     }
   };
 
-  const handleDeleteProduct = async (payload) => {
+  const handleDeleteProduct = async (payload: any) => {
     try {
       const res = await deleteProduct(payload._id).unwrap();
       message.success(
@@ -138,14 +140,13 @@ const Products = () => {
     }
   };
 
-
   const handleModalCancel = () => {
     setEditingProduct(null);
     setModalVisible(false);
     form.resetFields();
   };
 
-  const openModalForEditing = (record) => {
+  const openModalForEditing = (record: any) => {
     setEditingProduct(record);
     setModalVisible(true);
   };
@@ -156,7 +157,7 @@ const Products = () => {
       dataIndex: "description",
       title: "Description",
       key: "description",
-      render: (description: string, record) => (
+      render: (description: string, record: any) => (
         <Tooltip title={record.description}>
           <p>
             {description.length > 100
@@ -179,7 +180,7 @@ const Products = () => {
     {
       title: "Image",
       key: "img",
-      render: (record) => (
+      render: (record: any) => (
         <img
           src={record?.images?.[0]}
           alt=""
@@ -190,7 +191,7 @@ const Products = () => {
     {
       title: "Action",
       key: "action",
-      render: (text, record) => (
+      render: (text: any, record: any) => (
         <Space>
           <Button
             type="primary"
@@ -315,7 +316,7 @@ const Products = () => {
               ]}
             >
               <InputNumber
-                parser={(value) => value.replace(/[^0-9]/g, "")}
+                parser={(value: any) => value.replace(/[^0-9]/g, "")}
                 placeholder="Enter Product price here"
                 className="w-full"
               />
@@ -333,7 +334,7 @@ const Products = () => {
               ]}
             >
               <InputNumber
-                parser={(value) => value.replace(/[^0-9]/g, "")}
+                parser={(value: any) => value.replace(/[^0-9]/g, "")}
                 placeholder="Enter Product stock here"
                 className="w-full"
               />
@@ -350,7 +351,7 @@ const Products = () => {
               ]}
             >
               <Select
-                options={categoryData?.data.map((category) => ({
+                options={categoryData?.data.map((category: TCategory) => ({
                   value: category._id,
                   label: category.name,
                 }))}

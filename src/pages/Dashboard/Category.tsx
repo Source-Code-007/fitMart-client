@@ -39,7 +39,9 @@ const Category = () => {
     useCreateCategoryMutation();
   const [updateCategory, { isLoading: isLoadingUpdateCategory }] =
     useUpdateCategoryMutation();
-  const [editingCategory, setEditingCategory] = useState<TProduct | null>(null);
+  const [editingCategory, setEditingCategory] = useState<TCategory | null>(
+    null
+  );
   const [modalVisible, setModalVisible] = useState(false);
   const [form] = Form.useForm();
 
@@ -58,7 +60,7 @@ const Category = () => {
     }
   }, [editingCategory, form]);
 
-  const handleAddToCategory = async (values) => {
+  const handleAddToCategory = async (values: any) => {
     try {
       const myIcons = [];
       // const imgUrl = imgbbRes.data.display_url;
@@ -94,7 +96,7 @@ const Category = () => {
     }
   };
 
-  const handleUpdateCategory = async (values: Partial<TCategory>) => {
+  const handleUpdateCategory = async (values: any) => {
     const icons = [];
     // const imgUrl = imgbbRes.data.display_url;
     // const newRecipe = { ...data, recipeImg: imgUrl };
@@ -117,7 +119,6 @@ const Category = () => {
       const res = await updateCategory({
         _id: editingCategory?._id,
         ...values,
-        category: editingCategory?.category?.value,
         ...(icons && icons?.length > 0 && { icon: icons?.[0] }),
       }).unwrap();
 
@@ -128,7 +129,7 @@ const Category = () => {
     }
   };
 
-  const handleDeleteCategory = async (payload) => {
+  const handleDeleteCategory = async (payload: any) => {
     try {
       const res = await deleteCategory(payload._id).unwrap();
       message.success(
@@ -146,7 +147,7 @@ const Category = () => {
     form.resetFields();
   };
 
-  const openModalForEditing = (record) => {
+  const openModalForEditing = (record: any) => {
     setEditingCategory(record);
     setModalVisible(true);
   };
@@ -157,7 +158,7 @@ const Category = () => {
       dataIndex: "description",
       title: "Description",
       key: "description",
-      render: (description: string, record) => (
+      render: (description: string, record: any) => (
         <Tooltip title={record.description}>
           <p>
             {description.length > 100
@@ -170,7 +171,7 @@ const Category = () => {
     {
       title: "Icon",
       key: "icon",
-      render: (record) => (
+      render: (record: any) => (
         <img
           src={record?.icon}
           alt=""
@@ -181,7 +182,7 @@ const Category = () => {
     {
       title: "Action",
       key: "action",
-      render: (text, record) => (
+      render: (text: any, record: any) => (
         <Space>
           <Button
             type="primary"

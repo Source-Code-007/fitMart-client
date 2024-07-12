@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
   return (
     <nav
       className="fixed top-0 left-0 right-0 bg-white"
-      style={{ zIndex: 10000 }}
+      style={{ zIndex: 1000 }}
     >
       <Container>
         <div className="flex justify-between items-center gap-4 border-b border-b-secondary-100 py-2">

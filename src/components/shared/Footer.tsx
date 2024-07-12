@@ -65,7 +65,7 @@ const Footer = () => {
             </div>
             {/* <!-- logo - end --> */}
 
-            <Typography.Text className="mb-6 text-gray sm:pr-8">
+            <Typography.Text className="mb-6 text-grey sm:pr-8">
               Whether you need durable cases, innovative gadgets, or stylish
               accessories, icchaporon.com has it all. Our collection features
               top brands, offering the best in quality and design.
@@ -274,7 +274,7 @@ const Footer = () => {
             <h1 className="mb-4 font-bold uppercase tracking-widest ">
               Newsletter
             </h1>
-            <Text className="text-normal-desc">
+            <Text className="text-grey">
               {/* Subscribe our newsletter to get our latest update and news. */}
               Get our latest product and special offers <br /> by subscribing to
               our newsletter

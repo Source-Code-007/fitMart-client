@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /* eslint-disable react/prop-types */
 import { Checkbox, Empty, Skeleton } from "antd";
 import { useEffect } from "react";

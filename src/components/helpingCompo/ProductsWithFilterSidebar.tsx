@@ -11,6 +11,7 @@ import { TCategory, TProduct, TProducts } from "../../types/index.type";
 import MobileFilterSidebar from "./MobileFilterSidebar";
 import Container from "../ui/Container";
 import {} from "react-router-dom";
+import type { CheckboxChangeEvent } from "antd/es/checkbox";
 
 type TProductsWithFilterSidebar = {
   products: TProducts;
@@ -62,18 +63,25 @@ const ProductsWithFilterSidebar: React.FC<TProductsWithFilterSidebar> = ({
     });
 
     // Remove unchecked categories from params
-    // Remove unchecked categories from params
     query.getAll("category").forEach((cat) => {
       if (!filters.category.includes(cat)) {
         // Remove specific category occurrences from params
         const catValues = query.getAll("category");
         catValues.forEach((value) => {
           if (value === cat) {
-            params.delete("category", value);
+            params.delete("category");
           }
         });
+
+
+            // Again add
+    filters.category.forEach((cat) => {
+      params.append("category", cat);
+    });
       }
     });
+
+
 
     // Update URL with new params
     const newUrl = `${location.pathname}?${params.toString()}`;
@@ -81,10 +89,7 @@ const ProductsWithFilterSidebar: React.FC<TProductsWithFilterSidebar> = ({
   }, [filters, location.pathname, query]);
 
   // Handle change filtering checkbox
-  const handleChangeFilter = (
-    type: "brand" | "category",
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChangeFilter = (type: "brand" | "category", e: any) => {
     if (type === "category") {
       if (e.target.checked && !filters.category.includes(e.target.value)) {
         setFilters({

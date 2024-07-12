@@ -98,7 +98,6 @@ const ProductDetails = () => {
                           smallImage: {
                             alt: name,
                             isFluidWidth: true,
-                            enlargedImagePortalId: "portal",
                             src: activeMagnifyImg || images?.[0],
                           },
                           largeImage: {

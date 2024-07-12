@@ -8,7 +8,7 @@ export const uploadApi = createApi({
   tagTypes: ["category", "product"],
   endpoints: (builder) => ({
     uploadFile: builder.mutation({
-      query: (file: File) => ({
+      query: (file: FormData) => ({
         url: `/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`,
         method: "POST",
         body: file,
