@@ -1,4 +1,12 @@
-import { Button, Typography, Radio, Image, Empty, message } from "antd";
+import {
+  Button,
+  Typography,
+  Radio,
+  Image,
+  Empty,
+  message,
+  Popconfirm,
+} from "antd";
 
 import { Link } from "react-router-dom";
 import { BsArrowRightCircle } from "react-icons/bs";
@@ -131,14 +139,19 @@ const CartCompo = () => {
                             </Radio.Group>
                           </div>
 
-                          <Button
-                            block
-                            type="primary"
-                            onClick={() => dispatch(removeFromCart(product))}
-                            // className="text-[#93278F] hover:text-[#852082] text-sm font-semibold select-none transition duration-100"
+                          <Popconfirm
+                            title="Are you sure you want to delete this product from cart?"
+                            onConfirm={() => dispatch(removeFromCart(product))}
+                            okText="Yes"
+                            cancelText="No"
                           >
-                            Delete
-                          </Button>
+                            <Button
+                              block
+                              type="primary"
+                            >
+                              Delete
+                            </Button>
+                          </Popconfirm>
                         </div>
                       </div>
                     </div>

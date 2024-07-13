@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 type TCompoToTop = {
-  children: ReactNode;
+  children: any;
 };
 
 const CompoToTop: React.FC<TCompoToTop> = ({ children }) => {

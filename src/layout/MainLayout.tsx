@@ -23,7 +23,7 @@ const MainLayout = () => {
 
       {/* Cart drawer */}
       <span
-        className={`h-10 w-10 bg-warning font-bold rounded-l-md flex items-center justify-center text-white fixed top-1/2 transition-all duration-500 cursor-pointer hover:scale-[1.02] ${
+        className={`h-10 w-10 bg-warning font-bold rounded-l-md flex items-center justify-center text-white text-xl my-shadow-1 fixed top-1/2 transition-all duration-500 cursor-pointer hover:scale-[1.02] ${
           products?.length > 0
             ? "right-0 visible opacity-100"
             : "-right-5 invisible opacity-0"

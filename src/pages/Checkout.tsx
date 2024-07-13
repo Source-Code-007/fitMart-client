@@ -1,12 +1,10 @@
 // src/components/CheckoutPage.js
-import { useState } from "react";
 import {
   Typography,
   Form,
   Table,
   Space,
   message,
-  Skeleton,
   Button,
   Result,
 } from "antd";
@@ -33,11 +31,10 @@ const Checkout = () => {
 
   const query = new URLSearchParams(window.location.search);
   const successQuery = query.get("status");
-  console.log(successQuery, "successQuery");
 
   // order api post here
   const handleCheckout = async (data: any) => {
-    const address = {
+    const shippingAddress = {
       details: data?.details,
       postalCode: data?.postalCode,
       city: data?.city,
@@ -47,20 +44,20 @@ const Checkout = () => {
 
     const orderData = {
       customerName: data.customerName,
+      phone: data.phone,
+      email: data.email,
       products: cartItems?.map((product) => ({
         product: product?._id,
         quantity: product?.quantity,
       })),
-      shippingAddress: { ...address },
+      shippingAddress: { ...shippingAddress },
       paymentMethod: data?.paymentMethod,
     };
 
-    console.log(orderData, "orderData");
 
     try {
       const data = await createOrder(orderData).unwrap();
 
-      console.log(data);
       if (data?.success === true) {
         message.success(data?.message);
         dispatch(clearCart());
@@ -79,6 +76,20 @@ const Checkout = () => {
       type: "text",
       rules: [{ required: true, message: "Please enter customer name" }],
       placeholder: "Enter customer name",
+    },
+    {
+      name: "phone",
+      label: "Phone",
+      type: "text",
+      rules: [{ required: true, message: "Please enter customer phone" }],
+      placeholder: "Enter customer phone",
+    },
+    {
+      name: "email",
+      label: "Email",
+      type: "text",
+      rules: [{ required: true, message: "Please enter customer email" }],
+      placeholder: "Enter customer email",
     },
     {
       name: "paymentMethod",
@@ -140,7 +151,13 @@ const Checkout = () => {
     },
   ];
 
-  const columns = [
+  interface TColumnType {
+    dataIndex:any,
+    key:any,
+    title:any,
+    render:any,
+  }
+  const columns:TColumnType[] = [
     {
       dataIndex: "index",
       key: "index",
@@ -198,7 +215,6 @@ const Checkout = () => {
     },
   ];
 
-  console.log(data, "data order");
 
   if (successQuery === "success") {
     return (

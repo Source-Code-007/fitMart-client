@@ -17,25 +17,25 @@ const socialInfo = [
     id: 1,
     title: "facebook",
     icon: <FaFacebookSquare size={22} />,
-    link: "https://www.facebook.com/icchaporon.com.bd",
+    link: "https://www.facebook.com",
   },
   {
     id: 2,
     title: "instagram",
     icon: <FaInstagramSquare size={22} />,
-    link: "https://www.facebook.com/icchaporon.com.bd",
+    link: "https://www.instagram.com",
   },
   {
     id: 3,
     title: "linkedin",
     icon: <FaLinkedin size={22} />,
-    link: "https://www.facebook.com/icchaporon.com.bd",
+    link: "https://www.linkedin.com",
   },
   {
     id: 4,
     title: "youtube",
     icon: <FaYoutube size={22} />,
-    link: "https://www.facebook.com/icchaporon.com.bd",
+    link: "https://www.youtube.com",
   },
 ];
 
@@ -87,7 +87,7 @@ const Footer = () => {
                   to="#"
                   className=" text-gray transition duration-100 hover:text-primary-2 focus:text-primary-2 text-sm"
                 >
-                  +8801721-815355
+                  +880170678-5160
                 </Link>
               </div>
               <div className="flex gap-3 items-center">
@@ -291,7 +291,7 @@ const Footer = () => {
                   placeholder="Email Address"
                 />
 
-                <button className="bg-primary-2 p-3 rounded-r-md border-r border-primary-2 hover:border-r  hover:border-primary-2 text-white">
+                <button className="bg-primary p-3 rounded-r-md text-white">
                   <BsCursorFill className="hover:scale-75" />
                 </button>
               </Space.Compact>

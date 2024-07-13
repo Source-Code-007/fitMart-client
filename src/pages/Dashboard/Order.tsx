@@ -8,7 +8,6 @@ import { TProduct } from "../../types/index.type";
 
 const Order = () => {
   const [pagination, setPagination] = useState({ page: 1, limit: 10 });
-  const authData = useSelector((state) => state.auth);
   const [searchTerm, setSearchTerm] = useState(null);
 
   const { data: orderData, isLoading: isLoadingOrder } = useGetAllOrderQuery({
@@ -27,6 +26,16 @@ const Order = () => {
       title: "Customer",
       dataIndex: "customerName",
       key: "customerName",
+    },
+    {
+      title: "Phone",
+      dataIndex: "phone",
+      key: "phone",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
     },
     {
       title: "Payment method",
@@ -113,7 +122,6 @@ const Order = () => {
     },
   ];
 
-  console.log(orderData, "orderData");
 
   return (
     <div className="py-8">

@@ -1,14 +1,14 @@
 import { Carousel } from "antd";
 import Container from "../ui/Container";
+import { Link } from "react-router-dom";
 const Banner = () => {
   const bannerItems = [
-    "https://www.startech.com.bd/image/cache/catalog/home/banner/eid-mobile-fest.ai-banner-982x500.webp",
+    "https://fitnessmart.com.bd/wp-content/uploads/2024/05/Training-Season-Gym-Instagram-Post-1.webp",
     "https://shahsports.com.bd/wp-content/uploads/2024/05/spirit-2.png",
     "https://shahsports.com.bd/wp-content/uploads/2024/05/sole2.png",
     "https://shahsports.com.bd/wp-content/uploads/2024/05/3-1.jpg",
     "https://fitbangladesh.com/public/uploads/all/zwtvUYxdrUyh2MJIpUmbjcSesU3oRjknYAM004w3.png",
     "https://raselsports.com/images/banners/Web-cover.webp",
-    "https://fitnessmart.com.bd/wp-content/uploads/2024/05/Training-Season-Gym-Instagram-Post-1.webp",
   ];
 
   return (
@@ -21,7 +21,8 @@ const Banner = () => {
           autoplay
         >
           {bannerItems.map((item, ind) => (
-            <div
+            <Link
+              to={"/products"}
               key={ind}
               className="bg-primary h-[400px] cursor-pointer rounded-md"
             >
@@ -32,7 +33,7 @@ const Banner = () => {
                   className="h-full w-full rounded-md"
                 />
               </div>
-            </div>
+            </Link>
           ))}
         </Carousel>
       </Container>

@@ -9,8 +9,8 @@ import Category from "../pages/Dashboard/Category";
 import Order from "../pages/Dashboard/Order";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
-import { Button, Result } from "antd";
 import NotFound from "../pages/NotFound";
+import AboutUs from "../pages/AboutUs";
 
 const routes = createBrowserRouter([
   {
@@ -23,8 +23,8 @@ const routes = createBrowserRouter([
         element: <Homepage />,
       },
       {
-        path: "about-us",
-        element: <h2>About Us Page</h2>,
+        path: "about",
+        element: <AboutUs />,
       },
       {
         path: "products",
