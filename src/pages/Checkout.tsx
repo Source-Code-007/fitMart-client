@@ -1,4 +1,5 @@
-// src/components/CheckoutPage.js
+// @ts-nocheck
+
 import {
   Typography,
   Form,
@@ -151,13 +152,7 @@ const Checkout = () => {
     },
   ];
 
-  interface TColumnType {
-    dataIndex:any,
-    key:any,
-    title:any,
-    render:any,
-  }
-  const columns:TColumnType[] = [
+  const columns= [
     {
       dataIndex: "index",
       key: "index",
