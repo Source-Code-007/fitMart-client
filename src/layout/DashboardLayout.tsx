@@ -25,6 +25,7 @@ import moment from "moment";
 import {
   DashboardOutlined,
   HomeFilled,
+  OrderedListOutlined,
   ProductFilled,
   ShoppingOutlined,
 } from "@ant-design/icons";
@@ -88,6 +89,11 @@ const DashboardLayout = () => {
       label: <Link to={"/dashboard/category"}>Category</Link>,
       key: "Category",
       icon: <BiCategory />,
+    },
+    {
+      label: <Link to={"/dashboard/order"}>Order</Link>,
+      key: "order",
+      icon: <OrderedListOutlined />,
     },
   ];
 

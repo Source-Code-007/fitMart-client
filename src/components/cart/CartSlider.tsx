@@ -1,8 +1,9 @@
 import { BsCartPlus, BsArrowRightCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { Typography, Radio, Button } from "antd";
+import { Typography, Radio, Button, message } from "antd";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { addToCart, removeOne } from "../../redux/features/cart/cartSlice";
+import { TProduct } from "../../types/index.type";
 
 const CartSlider = ({ isCartOpen, onClose }) => {
   const { products: cartItems, total: totalAmount } = useAppSelector(
@@ -11,6 +12,16 @@ const CartSlider = ({ isCartOpen, onClose }) => {
 
   const dispatch = useAppDispatch();
 
+  const handleIncreaseProduct = (product: TProduct) => {
+    const existProduct = cartItems.find((item) => item._id === product._id);
+
+    if (product.stock > existProduct.quantity) {
+      dispatch(addToCart(product));
+      message.success("Quantity increased");
+      return;
+    }
+    message.error("Out of stock");
+  };
   return (
     <section className="">
       <div>
@@ -44,13 +55,13 @@ const CartSlider = ({ isCartOpen, onClose }) => {
                               to={`/product/${product?._id}`}
                             >
                               <img
-                                className="object-cover object-center h-12 w-12 rounded"
+                                className="object-cover object-center h-12 w-12 rounded shadow"
                                 src={product?.images?.[0]}
                                 alt={product?.name}
                               />
 
-                              <div className="h-[20px] w-[20px] bg-primary-2 rounded-full my-shadow-1 flex items-center justify-center text-white absolute -right-2 -top-2">
-                                {product?.stock}
+                              <div className="h-[20px] w-[20px] bg-primary-2 rounded-full my-shadow-1 flex items-center justify-center bg-warning text-white absolute -right-2 -top-2">
+                                {product?.quantity}
                               </div>
                             </Link>
 
@@ -70,7 +81,7 @@ const CartSlider = ({ isCartOpen, onClose }) => {
                               </Radio.Button>
                               <Radio.Button
                                 value="small"
-                                onClick={() => dispatch(addToCart(product))}
+                                onClick={() => handleIncreaseProduct(product)}
                               >
                                 +
                               </Radio.Button>
@@ -81,7 +92,7 @@ const CartSlider = ({ isCartOpen, onClose }) => {
                                 Tk {product?.price}
                               </Typography.Text>
                               <Typography.Text className="text-xs text-gray-500 text-nowrap">
-                                x {product?.stock}
+                                x {product?.quantity}
                               </Typography.Text>
 
                               <Typography.Text className="text-xs text-gray-500 text-nowrap">

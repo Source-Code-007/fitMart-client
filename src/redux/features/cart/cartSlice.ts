@@ -16,9 +16,9 @@ const cartSlice = createSlice({
       );
 
       if (isExistProducts) {
-        isExistProducts.stock = isExistProducts.stock + 1;
+        isExistProducts.quantity = isExistProducts.quantity + 1;
       } else {
-        state.products.push({ ...action.payload, stock: 1 });
+        state.products.push({ ...action.payload, quantity: 1 });
       }
 
       state.total += action.payload.price;
@@ -29,8 +29,8 @@ const cartSlice = createSlice({
         (product: TProduct) => product._id === action.payload._id
       );
 
-      if (isExistProducts && isExistProducts.stock > 1) {
-        isExistProducts.stock = isExistProducts.stock - 1;
+      if (isExistProducts && isExistProducts.quantity > 1) {
+        isExistProducts.quantity = isExistProducts.quantity - 1;
       } else {
         state.products = state.products.filter(
           (product: TProduct) => product._id !== action.payload._id
@@ -42,7 +42,7 @@ const cartSlice = createSlice({
       state.products = state.products.filter(
         (product: TProduct) => product._id !== action.payload._id
       );
-      state.total -= action.payload.price * action.payload.stock;
+      state.total -= action.payload.price * action.payload.quantity;
     },
 
     clearCart(state) {

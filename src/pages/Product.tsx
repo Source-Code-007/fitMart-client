@@ -1,4 +1,4 @@
-import { Button, Card, Empty, Skeleton, Tabs, Typography } from "antd";
+import { Button, Card, Empty, message, Skeleton, Tabs, Typography } from "antd";
 import ReactImageMagnify from "react-image-magnify";
 import { useEffect, useState } from "react";
 import { BsCartPlus } from "react-icons/bs";
@@ -51,6 +51,14 @@ const ProductDetails = () => {
       setActiveMagnifyImg(images[0]?.url);
     }
   }, [images]);
+
+  const handleAddToCart = (product: TProduct) => {
+    if (Number(product.stock) === 0) {
+      message.error("Out of stock");
+      return;
+    }
+    dispatch(addToCart(product));
+  };
 
   return (
     <section>
@@ -187,7 +195,7 @@ const ProductDetails = () => {
                   {/* CTA btn */}
                   <div className="flex items-center gap-1">
                     <Button
-                      onClick={() => dispatch(addToCart(product?.data))}
+                      onClick={() => handleAddToCart(product?.data)}
                       icon={<BsCartPlus />}
                       type="default"
                       color="primary"

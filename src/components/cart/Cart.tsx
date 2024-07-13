@@ -1,6 +1,4 @@
-import { useEffect } from "react";
-import { Button, Typography, Radio, Image } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { Button, Typography, Radio, Image, Empty, message } from "antd";
 
 import { Link } from "react-router-dom";
 import { BsArrowRightCircle } from "react-icons/bs";
@@ -9,22 +7,28 @@ import {
   removeFromCart,
   removeOne,
 } from "../../redux/features/cart/cartSlice";
-import EmptyCart from "../helpingCompo/EmptyCart";
 import { CheckCircleFilled } from "@ant-design/icons";
 import { FaXmark } from "react-icons/fa6";
-// import PrimaryButton from "../../../shared/Button/PrimaryButton";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { TProduct } from "../../types/index.type";
 
 const CartCompo = () => {
-  const { products:cartItems, total:totalAmount } = useSelector((state) => state.cart);
-  // const cartItems = useSelector((state) => state.cart.products);
-  // const totalAmount = useSelector((state) => state.cart.total);
-  const dispatch = useDispatch();
+  const { products: cartItems, total: totalAmount } = useAppSelector(
+    (state) => state.cart
+  );
 
-  // Store the cart items in the local storage whenever they change
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    localStorage.setItem("total", totalAmount.toString());
-  }, [cartItems, totalAmount]);
+  const dispatch = useAppDispatch();
+
+  const handleIncreaseProduct = (product: TProduct) => {
+    const existProduct = cartItems.find((item) => item._id === product._id);
+
+    if (product.stock > existProduct.quantity) {
+      dispatch(addToCart(product));
+      message.success("Quantity increased");
+      return;
+    }
+    message.error("Out of stock");
+  };
 
   return (
     <section>
@@ -42,7 +46,7 @@ const CartCompo = () => {
                 {cartItems?.map((product, index) => {
                   return (
                     <div
-                      key={index.id}
+                      key={index}
                       className="flex flex-wrap overflow-hidden gap-x-4 sm:gap-y-4 lg:gap-6"
                     >
                       <Link
@@ -50,7 +54,7 @@ const CartCompo = () => {
                         className="group w-32 sm:w-40 sm:h-56 block overflow-hidden relative"
                       >
                         <Image
-                          src={product?.images?.[0]?.url}
+                          src={product?.images?.[0]}
                           loading="lazy"
                           alt=" by Thái An"
                           className="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200 rounded"
@@ -65,29 +69,42 @@ const CartCompo = () => {
                           >
                             <Typography.Text>{product?.title}</Typography.Text>
                           </Link>
-
                         </div>
 
                         <div>
                           <p className="block text-gray-800 md:text-lg font-bold">
                             <Typography.Text className="font-bold">
-                            ৳{product?.price}
+                              ৳{product?.price}
                             </Typography.Text>
                           </p>
 
-
                           <p className="flex items-center text-gray-500 text-sm gap-1">
-   
-                            {
-                              product?.quantity > 0 ? <span className="flex items-center gap-1"><CheckCircleFilled className="text-green-500"/> In stock</span> : <span className="flex items-center gap-1"><FaXmark className="text-red-500"/> Out of stock</span>
-                            }
+                            {product?.stock > 0 ? (
+                              <span className="flex items-center gap-1">
+                                <CheckCircleFilled className="text-green-500" />{" "}
+                                In stock
+                              </span>
+                            ) : (
+                              <span className="flex items-center gap-1">
+                                <FaXmark className="text-red-500" /> Out of
+                                stock
+                              </span>
+                            )}
                           </p>
 
-                          {product?.quantity > 0 && <Typography.Text className="block">Quantity: {product?.quantity}</Typography.Text>}
+                          <Typography.Text className="block">
+                            Quantity: {product?.quantity}
+                          </Typography.Text>
+
+                          {product?.stock > 0 && (
+                            <Typography.Text className="block">
+                              Stock: {product?.stock}
+                            </Typography.Text>
+                          )}
 
                           <Typography.Text className="inline-block">
-                            Total Price: TK {" "}
-                            {(product.price * product.quantity).toFixed(2)}{" "}
+                            Total Price: TK{" "}
+                            {(product.price * product.stock).toFixed(2)}{" "}
                           </Typography.Text>
                         </div>
                       </div>
@@ -95,8 +112,7 @@ const CartCompo = () => {
                       <div className="w-full sm:w-auto flex justify-between border-t sm:border-none p-4 sm:pl-0 lg:p-6 lg:pl-0">
                         <div className="flex flex-col items-start gap-2">
                           <div className=" flex border rounded overflow-hidden">
-                            <Radio.Group
-                            >
+                            <Radio.Group>
                               <Radio.Button
                                 value="large"
                                 onClick={() => dispatch(removeOne(product))}
@@ -108,7 +124,7 @@ const CartCompo = () => {
                               </Radio.Button>
                               <Radio.Button
                                 value="small"
-                                onClick={() => dispatch(addToCart(product))}
+                                onClick={() => handleIncreaseProduct(product)}
                               >
                                 +
                               </Radio.Button>
@@ -171,7 +187,7 @@ const CartCompo = () => {
         ) : (
           <>
             {/* when cart is empty */}
-           <EmptyCart/>
+            <Empty description="Cart is empty" />
           </>
         )}
       </div>

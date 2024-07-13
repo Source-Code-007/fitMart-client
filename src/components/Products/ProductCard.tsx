@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Button, Card, Typography } from "antd";
+import { Button, Card, message, Typography } from "antd";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { BsCartPlus } from "react-icons/bs";
@@ -12,6 +12,16 @@ type TProductCard = {
 
 const ProductCard: React.FC<TProductCard> = ({ product }) => {
   const dispatch = useDispatch();
+
+  const handleAddToCart = (product: TProduct) => {
+    if (Number(product.stock) === 0) {
+      message.error("Out of stock");
+      return;
+    }
+    dispatch(addToCart(product));
+    message.success("Added to cart");
+  };
+  
 
   return (
     <div>
@@ -28,11 +38,16 @@ const ProductCard: React.FC<TProductCard> = ({ product }) => {
 
         <Card.Meta
           title={
-            <div className="flex items-end gap-2">
-              <p className=" font-semibold text-lg">
-                <span className="!text-primary-2">৳ {product?.price}</span>
+            <>
+              <div className="flex items-end gap-2">
+                <p className=" font-semibold text-lg">
+                  <span className="!text-primary-2">৳ {product?.price}</span>
+                </p>
+              </div>
+              <p className="text-secondary-200 font-normal">
+                stock: {product?.stock}
               </p>
-            </div>
+            </>
           }
           description={
             <Typography.Paragraph
@@ -51,7 +66,7 @@ const ProductCard: React.FC<TProductCard> = ({ product }) => {
           style={{
             marginTop: "10px",
           }}
-          onClick={() => dispatch(addToCart(product))}
+          onClick={() => handleAddToCart(product)}
           icon={<BsCartPlus />}
           iconPosition="end"
           block

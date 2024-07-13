@@ -6,6 +6,8 @@ import Product from "../pages/Product";
 import DashboardLayout from "../layout/DashboardLayout";
 import DashboardProducts from "../pages/Dashboard/Products";
 import Category from "../pages/Dashboard/Category";
+import Order from "../pages/Dashboard/Order";
+import Cart from "../pages/Cart";
 
 const routes = createBrowserRouter([
   {
@@ -23,6 +25,10 @@ const routes = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
       },
       {
         path: "product/:id",
@@ -49,6 +55,10 @@ const routes = createBrowserRouter([
       {
         path: "category",
         element: <Category />,
+      },
+      {
+        path: "order",
+        element: <Order />,
       },
     ],
   },
