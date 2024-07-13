@@ -359,7 +359,7 @@ const Footer = () => {
             </Col>
             <Col xs={24} lg={12} xl={8}>
               <Typography.Text style={{ color: "gray" }}>
-                © 2024 - Present Icchaporon.com All rights reserved.
+                © 2024 - Present fitmart.com All rights reserved.
               </Typography.Text>
             </Col>
             {/* payment gateway */}

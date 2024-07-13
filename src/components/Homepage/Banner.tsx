@@ -3,9 +3,12 @@ import Container from "../ui/Container";
 const Banner = () => {
   const bannerItems = [
     "https://www.startech.com.bd/image/cache/catalog/home/banner/eid-mobile-fest.ai-banner-982x500.webp",
-    "https://www.startech.com.bd/image/cache/catalog/home/banner/MSI-Back-to-School--Offer-982x500.webp",
-    "https://www.startech.com.bd/image/cache/catalog/home/banner/ZTE%20Blade%20V40%20Smartphone-982x500.webp",
-    "https://www.startech.com.bd/image/cache/catalog/home/banner/Stealth-16-Studio-A13VG-407BD-web-banner-982x500.webp",
+    "https://shahsports.com.bd/wp-content/uploads/2024/05/spirit-2.png",
+    "https://shahsports.com.bd/wp-content/uploads/2024/05/sole2.png",
+    "https://shahsports.com.bd/wp-content/uploads/2024/05/3-1.jpg",
+    "https://fitbangladesh.com/public/uploads/all/zwtvUYxdrUyh2MJIpUmbjcSesU3oRjknYAM004w3.png",
+    "https://raselsports.com/images/banners/Web-cover.webp",
+    "https://fitnessmart.com.bd/wp-content/uploads/2024/05/Training-Season-Gym-Instagram-Post-1.webp",
   ];
 
   return (
