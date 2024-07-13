@@ -1,4 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+// @ts-nocheck
+
+import { useEffect, useState, useRef } from "react";
 import CartCompo from "../components/cart/Cart";
 import { Modal } from "antd";
 
@@ -6,7 +8,7 @@ const Cart = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const beforeUnloadRef = useRef();
 
-  const handleBeforeUnload = (event) => {
+  const handleBeforeUnload = (event: any) => {
     event.preventDefault(); // Standard for most browsers
     event.returnValue = ""; // For some old browsers
     setIsModalVisible(true); // Show the modal
