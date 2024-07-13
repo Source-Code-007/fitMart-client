@@ -8,7 +8,7 @@ const orderApi = baseApi.injectEndpoints({
         method: "POST",
         body: payload,
       }),
-      invalidatesTags: ["order"],
+      invalidatesTags: ["order", "product"],
     }),
     getAllOrder: builder.query({
       query: (filter) => {

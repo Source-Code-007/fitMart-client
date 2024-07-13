@@ -24,6 +24,16 @@ const Order = () => {
       key: "orderNumber",
     },
     {
+      title: "Customer",
+      dataIndex: "customerName",
+      key: "customerName",
+    },
+    {
+      title: "Payment method",
+      dataIndex: "paymentMethod",
+      key: "paymentMethod",
+    },
+    {
       title: "Order Status",
       dataIndex: "orderStatus",
       key: "orderStatus",
@@ -112,7 +122,7 @@ const Order = () => {
           <h2 className="font-bold text-2xl lg:text-3xl mb-8">Orders</h2>
 
           <Search
-            placeholder="Search by order id"
+            placeholder="Search by order status or payment status"
             onSearch={(value) => setSearchTerm(value)}
             size="large"
             allowClear

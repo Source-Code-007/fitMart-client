@@ -73,15 +73,12 @@ const ProductsWithFilterSidebar: React.FC<TProductsWithFilterSidebar> = ({
           }
         });
 
-
-            // Again add
-    filters.category.forEach((cat) => {
-      params.append("category", cat);
-    });
+        // Again add
+        filters.category.forEach((cat) => {
+          params.append("category", cat);
+        });
       }
     });
-
-
 
     // Update URL with new params
     const newUrl = `${location.pathname}?${params.toString()}`;
@@ -225,6 +222,7 @@ const ProductsWithFilterSidebar: React.FC<TProductsWithFilterSidebar> = ({
             <div className="flex-1">
               {isProductsLoading ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                  <Skeleton.Button className="!h-[250px] !w-full" />
                   <Skeleton.Button className="!h-[250px] !w-full" />
                   <Skeleton.Button className="!h-[250px] !w-full" />
                   <Skeleton.Button className="!h-[250px] !w-full" />

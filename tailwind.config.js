@@ -25,7 +25,7 @@ export default {
         success: "#10b981",
         warning: "#fe964a",
         danger: "#fd6a6a",
-      },
+      }
     },
   },
   plugins: [],

@@ -38,7 +38,7 @@ const CartCompo = () => {
             <div className=" max-w-screen-lg  px-4 md:px-8 mx-auto ">
               <div className="mb-6 sm:mb-10 lg:mb-16 ">
                 <h2 className=" text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">
-                  Order Details
+                  Products ready to checkout
                 </h2>
               </div>
 
@@ -47,16 +47,16 @@ const CartCompo = () => {
                   return (
                     <div
                       key={index}
-                      className="flex flex-wrap overflow-hidden gap-x-4 sm:gap-y-4 lg:gap-6"
+                      className="flex flex-wrap items-center overflow-hidden gap-x-4 sm:gap-y-4 lg:gap-6 rounded my-shadow-1"
                     >
                       <Link
                         to={`/product/${product?._id}`}
-                        className="group w-32 sm:w-40 sm:h-56 block overflow-hidden relative"
+                        className="group w-32 sm:w-40 sm:h-56 overflow-hidden relative flex items-center justify-center"
                       >
                         <Image
                           src={product?.images?.[0]}
                           loading="lazy"
-                          alt=" by Thái An"
+                          alt={product?.name}
                           className="w-full h-full object-cover object-center group-hover:scale-110 transition duration-200 rounded"
                         />
                       </Link>
@@ -92,15 +92,15 @@ const CartCompo = () => {
                             )}
                           </p>
 
-                          <Typography.Text className="block">
-                            Quantity: {product?.quantity}
-                          </Typography.Text>
-
                           {product?.stock > 0 && (
                             <Typography.Text className="block">
                               Stock: {product?.stock}
                             </Typography.Text>
                           )}
+
+                          <Typography.Text className="block">
+                            Quantity: {product?.quantity}
+                          </Typography.Text>
 
                           <Typography.Text className="inline-block">
                             Total Price: TK{" "}
@@ -151,12 +151,12 @@ const CartCompo = () => {
                   <div className="space-y-1 ">
                     <div className=" flex justify-between  text-gray-500 gap-4">
                       <span>Subtotal</span>
-                      <span>{totalAmount.toFixed(2)}</span>
+                      <span>BDT {totalAmount.toFixed(2)}</span>
                     </div>
 
                     <div className="flex justify-between text-gray-500 gap-4 ">
                       <span>Shipping</span>
-                      <span>$4.99</span>
+                      <span>BDT 0</span>
                     </div>
                   </div>
 
@@ -166,7 +166,7 @@ const CartCompo = () => {
 
                       <span className="flex flex-col items-end ">
                         <span className="text-lg font-bold">
-                          ${totalAmount.toFixed(2)}
+                          BDT {totalAmount.toFixed(2)}
                         </span>
                         <span className="text-gray-500 text-sm">
                           including VAT

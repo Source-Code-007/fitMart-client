@@ -29,6 +29,7 @@ import {
   ProductFilled,
   ShoppingOutlined,
 } from "@ant-design/icons";
+import CompoToTop from "../components/helpingCompo/CompoToTop";
 const { Header, Content, Sider } = Layout;
 
 function getItem(label, key, icon, children?) {
@@ -193,7 +194,9 @@ const DashboardLayout = () => {
               // background: colorBgContainer,
             }}
           >
-            <Outlet></Outlet>
+            <CompoToTop>
+              <Outlet />
+            </CompoToTop>
           </div>
         </Content>
       </Layout>

@@ -89,14 +89,14 @@ const CartSlider = ({ isCartOpen, onClose }) => {
 
                             <div className="flex-1 ml-3 text-right flex flex-col">
                               <Typography.Text className="text-xs text-gray-500 text-nowrap">
-                                Tk {product?.price}
+                                BDT {product?.price}
                               </Typography.Text>
                               <Typography.Text className="text-xs text-gray-500 text-nowrap">
                                 x {product?.quantity}
                               </Typography.Text>
 
                               <Typography.Text className="text-xs text-gray-500 text-nowrap">
-                                Tk {(product.price * product.stock).toFixed(2)}{" "}
+                                BDT {(product.price * product.stock).toFixed(2)}{" "}
                               </Typography.Text>
                             </div>
                           </div>
@@ -111,22 +111,22 @@ const CartSlider = ({ isCartOpen, onClose }) => {
                     <div className="space-y-1 px-4 py-2">
                       <div className="flex justify-between text-gray-500 gap-1">
                         <span>Subtotal</span>
-                        <span>Tk {totalAmount.toFixed(2)}</span>
+                        <span>BDT {totalAmount.toFixed(2)}</span>
                       </div>
 
                       <div className="flex justify-between text-gray-500 gap-1">
                         <span>Shipping</span>
-                        <span>Tk 4.99</span>
+                        <span>BDT 0</span>
                       </div>
                     </div>
 
                     <div className="border-t mt-2 ">
-                      <div className="flex px-4 justify-between items-start text-gray-800 gap-1">
+                      <div className="flex px-4 justify-between items-center text-gray-800 gap-1">
                         <span className=" font-bold">Total</span>
 
                         <span className="flex flex-col items-end ">
                           <span className=" font-bold ">
-                            Tk {totalAmount.toFixed(2)}
+                            BDT {totalAmount.toFixed(2)}
                           </span>
                           <span className="text-gray-500 text-sm ">
                             including Vat Tax

@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Link } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import Homepage from "../pages/Homepage";
 import Products from "../pages/Products";
@@ -8,11 +8,15 @@ import DashboardProducts from "../pages/Dashboard/Products";
 import Category from "../pages/Dashboard/Category";
 import Order from "../pages/Dashboard/Order";
 import Cart from "../pages/Cart";
+import Checkout from "../pages/Checkout";
+import { Button, Result } from "antd";
+import NotFound from "../pages/NotFound";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <NotFound />,
     children: [
       {
         path: "/",
@@ -31,6 +35,10 @@ const routes = createBrowserRouter([
         element: <Cart />,
       },
       {
+        path: "checkout",
+        element: <Checkout />,
+      },
+      {
         path: "product/:id",
         element: <Product />,
       },
@@ -39,6 +47,7 @@ const routes = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashboardLayout />,
+    errorElement: <NotFound />,
     children: [
       {
         path: "/dashboard",

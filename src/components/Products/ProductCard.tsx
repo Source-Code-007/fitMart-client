@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { BsCartPlus } from "react-icons/bs";
 import { addToCart } from "../../redux/features/cart/cartSlice";
 import { TProduct } from "../../types/index.type";
+import { useAppSelector } from "../../redux/hook";
 
 type TProductCard = {
   product: TProduct;
@@ -12,16 +13,22 @@ type TProductCard = {
 
 const ProductCard: React.FC<TProductCard> = ({ product }) => {
   const dispatch = useDispatch();
+  const { products: cartItems } = useAppSelector((state) => state.cart);
 
   const handleAddToCart = (product: TProduct) => {
-    if (Number(product.stock) === 0) {
-      message.error("Out of stock");
+    const existProduct = cartItems.find((item) => item._id === product._id);
+
+    if (
+      product?.stock > (existProduct?.quantity || 0) &&
+      Number(product.stock) != 0
+    ) {
+      dispatch(addToCart(product));
+      message.success("Product added to cart");
       return;
     }
-    dispatch(addToCart(product));
-    message.success("Added to cart");
+
+    message.error("Out of stock");
   };
-  
 
   return (
     <div>
@@ -73,6 +80,7 @@ const ProductCard: React.FC<TProductCard> = ({ product }) => {
           type="default"
           color="primary"
           className="btn-outline-one !absolute bottom-2 left-0 right-0 !w-[70%] mx-auto"
+          disabled={Number(product.stock) === 0}
         >
           Add to Cart
         </Button>
